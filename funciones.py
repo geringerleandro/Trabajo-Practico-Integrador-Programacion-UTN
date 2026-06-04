@@ -15,11 +15,11 @@ def valida_continente(mensaje):
         except ValueError as e:
             print(f"ERROR: {e}")
 
-def numero_entero_positivo(numero):
+def numero_entero_positivo(mensaje):
     while True:
         try:
             # 1. Pedimos el dato
-            ingreso = input(numero)
+            ingreso = input(mensaje)
             # 2. Intentamos convertirlo a entero (lanza ValueError si tiene letras)
             numero = int(ingreso) 
             # 3. Debe ser estrictamente positivo
@@ -33,7 +33,7 @@ def numero_entero_positivo(numero):
 
 
 def valida_nombre(mensaje, diccionario):
-     while True:
+    while True:
         try:
             # Pedimos el input, le sacamos espacios extra y lo ponemos en Title Case
             nombre = input(mensaje).strip().title()
