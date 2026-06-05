@@ -53,3 +53,29 @@ def valida_nombre(mensaje, diccionario):
         except ValueError as e:
             print(f"ERROR: {e}")
 
+def filtrar_por_continente(paises, continente):
+    resultado = []
+
+    for pais in paises:
+        if pais ["continente"].lower() == continente.lower():
+            resultado.append(pais)
+    
+    return resultado
+
+def filtrar_por_rango_poblacion(paises, minimo, maximo):
+    resultado = []
+
+    for pais in paises:
+        if minimo <= pais["poblacion"]<= maximo:
+            resultado.append(pais)
+
+    return resultado
+
+def filtrar_por_superficie(paises, minimo, maximo):
+    resultado = []
+
+    for pais in paises:
+        if minimo <= pais["superficie"] <= maximo:
+            resultado.append(pais)
+
+    return resultado
