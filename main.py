@@ -33,7 +33,18 @@ def funcionalidad_1(diccionario):
     return
 
 def funcionalidad_2(diccionario):
-    pass
+    #Usamos la función validadora "valida_continente" ya que esta admite repetidos
+    pais_buscado=valida_continente("Ingrese el país a modificar: ")
+    for pais in diccionario:
+        if pais['nombre'] == pais_buscado:
+            nueva_poblacion=numero_entero_positivo("Ingrese la nueva población: ")
+            nueva_superficie=numero_entero_positivo("Ingrese la nueva superficie: ")
+            pais['poblacion'] = nueva_poblacion
+            pais['superficie'] = nueva_superficie
+            print("Datos actualizados correctamente")
+            return
+    # Si el bucle principal termina sin return, el país ingresado no esta en el dataset.
+    print("El país ingresado no se encuentra en la lista de países.")
 
 def funcionalidad_3(diccionario):
     pass
@@ -58,7 +69,7 @@ while ingreso_menu:
         case 1:
             funcionalidad_1(diccionario_paises)
         case 2:
-            pass
+            funcionalidad_2(diccionario_paises)
         case 3:
             pass
         case 4:
