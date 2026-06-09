@@ -47,7 +47,20 @@ def funcionalidad_2(diccionario):
     print("El país ingresado no se encuentra en la lista de países.")
 
 def funcionalidad_3(diccionario):
-    pass
+    busqueda = valida_continente("Ingrese el nombre o parte del nombre a buscar: ")
+    resultados = []
+    for pais in diccionario:
+        if busqueda.lower() in pais['nombre'].lower():
+            resultados.append(pais)
+    if len(resultados) == 0:
+        print("No se encontraron países con ese nombre.")
+    elif len(resultados) == 1:
+        print("Se encontro 1 resultado:")
+        print(f"Nombre: {resultados[0]['nombre']} | Población: {resultados[0]['poblacion']} | Superficie: {resultados[0]['superficie']} | Continente: {resultados[0]['continente']}")
+    else:
+        print(f"Se encontraron {len(resultados)} resultados:")    
+        for pais in resultados:
+            print(f"Nombre: {pais['nombre']} | Población: {pais['poblacion']} | Superficie: {pais['superficie']} | Continente: {pais['continente']}")
 
 def guardar_csv(diccionario):
     with open('paises.csv', 'w', encoding='utf-8') as archivo:
@@ -78,7 +91,7 @@ while ingreso_menu:
         case 2:
             funcionalidad_2(diccionario_paises)
         case 3:
-            pass
+            funcionalidad_3(diccionario_paises)
         case 4:
             pass
         case 5:
