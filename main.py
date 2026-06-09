@@ -49,6 +49,13 @@ def funcionalidad_2(diccionario):
 def funcionalidad_3(diccionario):
     pass
 
+def guardar_csv(diccionario):
+    with open('paises.csv', 'w', encoding='utf-8') as archivo:
+        archivo.write('nombre,poblacion,superficie,continente\n')
+        for pais in diccionario:
+            archivo.write(f"{pais['nombre']},{pais['poblacion']},{pais['superficie']},{pais['continente']}\n")
+    print("Datos guardados correctamente.")
+
 #Bloque 3: Logica del menú
 
 ingreso_menu = True
@@ -61,7 +68,7 @@ while ingreso_menu:
     print("4- Filtrar paises.")
     print("5- Ordenar paises.")
     print("6- Mostrar estadisticas.")
-    print("7- Salir.")
+    print("7- Guardar y salir.")
 
     opcion = numero_entero_positivo("Ingrese opcion: ")
 
@@ -79,6 +86,7 @@ while ingreso_menu:
         case 6:
             pass
         case 7:
+            guardar_csv(diccionario_paises)
             print("Saliendo....")
             ingreso_menu = False
             break
