@@ -37,7 +37,6 @@ def valida_nombre(mensaje, diccionario):
         try:
             # Pedimos el input, le sacamos espacios extra y lo ponemos en Title Case
             nombre = input(mensaje).strip().title()
-
             #Regla 1: No puede estar vacío,
             if nombre == "":
                 raise ValueError("El nombre no puede estar vacío.")
@@ -47,7 +46,7 @@ def valida_nombre(mensaje, diccionario):
             # Regla 3: No puede estar duplicado en nuestro inventario (lista de diccionarios)
             for item in diccionario:
                 if item['nombre'] == nombre:
-                    raise ValueError(f"El nombre '{nombre}' ya se encuentra en el diccionario.")
+                    raise ValueError(f"El país '{nombre}' ya se encuentra en el diccionario.")
             # Si sobrevivió a todas las validaciones, lo retornamos
             return nombre
         except ValueError as e:

@@ -87,8 +87,8 @@ ingreso_menu = True
 
 while ingreso_menu:
     print("Menu:")
-    print("1- Agregar pais")
-    print("2- Actualizar poblacion")
+    print("1- Agregar pais.")
+    print("2- Actualizar poblacion y superficie.")
     print("3- Buscar pais por nombre.")
     print("4- Filtrar paises.")
     print("5- Ordenar paises.")
