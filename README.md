@@ -76,5 +76,5 @@ Canadá
 ## Repositorio y documentación
 
 - Repositorio: https://github.com/geringerleandro/Trabajo-Practico-Integrador-Programacion-UTN/tree/main
-- Documentación PDF: [enlace al PDF]
+- Documentación PDF: https://drive.google.com/file/d/1cV1ppy2nEgQtM_OQX3eCX6lAJNGfFATC/view
 - Video demostración: https://drive.google.com/file/d/1-N1EcVi8NVdEHLOWwO5Uw6Vb3xgo8oWq/view?ts=6a2c85d1
