@@ -1,12 +1,17 @@
-
+# Importación de módulos creados en funciones.py
 from funciones import valida_nombre,valida_continente,numero_entero_positivo,filtrar_por_continente,filtrar_por_rango_poblacion,filtrar_por_superficie,ordenar_paises,ordenar_por_poblacion,superficie_menor_a_mayor,superficie_mayor_a_menor,mayor_y_menor_poblacion,promedio_poblacion,promedio_superficie_continente,quitar_acentos,paises_en_continente
+
+# BLOQUE 1: CARGA INICIAL DEL DATASET Y MANEJO DE EXCEPCIONES
 
 try:
     diccionario_paises=[]
+    # Abrimos el archivo en modo lectura ('r') protegiendo caracteres especiales con utf-8
     with open ('paises.csv', 'r', encoding="utf-8" ) as archivo:
-        encabezado=next(archivo)
+        encabezado=next(archivo)# Saltamos la primera línea
         for linea in archivo:
+            # Separamos cada registro por las comas y limpiamos saltos de línea
             linea_procesada=linea.strip().split(",")
+            # Construimos el diccionario convirtiendo tipos de datos numéricos
             linea_paises={
                 'nombre': linea_procesada[0],
                 'poblacion': int(linea_procesada[1]),
@@ -14,7 +19,7 @@ try:
                 'continente': quitar_acentos(linea_procesada[3])
                 }
             diccionario_paises.append(linea_paises)
-
+# Control robusto en caso de que el entorno no encuentre el CSV o haya datos corruptos
 except FileNotFoundError:
     print("Error: no se encontró el archivo paises.csv.")
     exit()
@@ -27,13 +32,15 @@ except IndexError:
 
 
 
-#Bloque 2: Lógica de las funcionalidades del menú
+# BLOQUE 2: LÓGICA DE LAS FUNCIONALIDADES DEL MENÚ
 
 def funcionalidad_1(diccionario):
+    """Alta de un nuevo país en la memoria."""
     pais_agregado=valida_nombre("Ingrese el nombre del país que desea agregar: ",diccionario)
     poblacion_agregada=numero_entero_positivo("Ingrese la población: ")
     superficie_agregada=numero_entero_positivo("Ingrese la superficie: ")
     continente_agregado=valida_continente("Ingrese a que continente pertenece: ")
+
     datos_agregados={
         'nombre': pais_agregado,
         'poblacion': poblacion_agregada,
@@ -45,20 +52,25 @@ def funcionalidad_1(diccionario):
     return
 
 def funcionalidad_2(diccionario):
+    """Modificación de los datos poblacionales y geográficos de un país existente."""
     #Usamos la función validadora "valida_continente" ya que esta admite repetidos
     pais_buscado=valida_continente("Ingrese el país a modificar: ")
     for pais in diccionario:
         if pais['nombre'] == pais_buscado:
             nueva_poblacion=numero_entero_positivo("Ingrese la nueva población: ")
             nueva_superficie=numero_entero_positivo("Ingrese la nueva superficie: ")
+
             pais['poblacion'] = nueva_poblacion
             pais['superficie'] = nueva_superficie
+
             print("Datos actualizados correctamente")
-            return
+            return #Salida temprana si se aplicó el cambio
+        
     # Si el bucle principal termina sin return, el país ingresado no esta en el dataset.
     print("El país ingresado no se encuentra en la lista de países.")
 
 def funcionalidad_3(diccionario):
+    """Buscador que permite coincidencias parciales de texto (subcadenas)."""
     busqueda = valida_continente("Ingrese el nombre o parte del nombre a buscar: ")
     resultados = []
     for pais in diccionario:
@@ -75,13 +87,14 @@ def funcionalidad_3(diccionario):
             print(f"Nombre: {pais['nombre']} | Población: {pais['poblacion']} | Superficie: {pais['superficie']} | Continente: {pais['continente']}")
 
 def guardar_csv(diccionario):
+    """Persistencia de datos: Vuelca la lista de memoria RAM hacia el archivo físico CSV."""
     with open('paises.csv', 'w', encoding='utf-8') as archivo:
         archivo.write('nombre,poblacion,superficie,continente\n')
         for pais in diccionario:
             archivo.write(f"{pais['nombre']},{pais['poblacion']},{pais['superficie']},{pais['continente']}\n")
     print("Datos guardados correctamente.")
 
-#Bloque 3: Logica del menú
+# BLOQUE 3: MENÚ PRINCIPAL E INTERFAZ CON EL USUARIO
 
 ingreso_menu = True
 
@@ -105,13 +118,12 @@ while ingreso_menu:
         case 3:
             funcionalidad_3(diccionario_paises)
         case 4:
+            # Submenú de Filtros
             print("Menu:")
             print("1- Filtrar por continente.")
             print("2- Filtrar por rango de poblacion.")
             print("3- Filtrar por rango de superficie.")
-
             opcion = numero_entero_positivo("Ingrese opcion: ")
-
             match opcion:
                 case 1:
                     continente = quitar_acentos(input("Ingrese continente: "))
@@ -145,6 +157,7 @@ while ingreso_menu:
                         for pais in resultado:
                             print(f"{pais['nombre']} - {pais['superficie']}")
         case 5:
+            # Submenú de Ordenamientos
             print("Menu:")
             print("1- Ordenar paises por nombre.")
             print("2- Ordenar paises por poblacion.")
@@ -172,6 +185,7 @@ while ingreso_menu:
                         case 2:
                             print(f"{superficie_mayor_a_menor(diccionario_paises)}")
         case 6:
+            # Submenú de Estadísticas
             print("Menu:")
             print("1- Pais con mayor y menor poblacion.")
             print("2- Promedio de poblacion.")
@@ -206,5 +220,4 @@ while ingreso_menu:
             guardar_csv(diccionario_paises)
             print("Saliendo....")
             ingreso_menu = False
-
-
+            
